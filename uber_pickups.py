@@ -72,4 +72,4 @@ st.map(df_filtered)
 
 "## How I built this"
 
-st.markdown("Check out the code [here](https://github.com/skiiyuru/uber-eda)")
+st.write("Check out the code [here](https://github.com/skiiyuru/uber-eda)")
