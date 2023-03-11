@@ -69,3 +69,7 @@ st.bar_chart(hist_values)
 filtered_hour = st.slider("Hour", 0, 23, 17)  # min: 0h, max: 23h, default: 17h
 df_filtered = df[hours == filtered_hour]
 st.map(df_filtered)
+
+"## How I built this"
+
+st.markdown("Check out the code [here](https://github.com/skiiyuru/uber-eda)")
