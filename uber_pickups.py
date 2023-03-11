@@ -1,8 +1,10 @@
 import streamlit as st
 import pandas as pd
 import numpy as np
+import altair as alt
 
 "# Uber Pickups in New York"
+# st.header("Uber Pickups in New York")
 
 DATE_COLUMN = "date/time"
 DATA_URL = (
@@ -36,6 +38,34 @@ loading_state = st.text("Loading data...🔃")
 
 df = load_data(nrows=10000)
 
-loading_state.text("Here is the data 😎")
+loading_state.text("")
 
-st.write(df.head())
+
+if st.checkbox("Show data"):
+    "## Raw data"
+    df
+
+"## Number of pickups by hour"
+
+# Use NumPy to generate a histogram that breaks down pickup times binned by hour:
+hours = df[DATE_COLUMN].dt.hour
+hist_values, bin_edges = np.histogram(hours, bins=24, range=(0, 24))
+
+# plot the chart
+st.bar_chart(hist_values)
+
+"## Map of pickups"
+# filter pickups for busiest hour
+
+# peak_hour = np.argmax(hist_values)
+# df_filtered = df[hours == peak_hour]
+
+# if st.checkbox(f"Only peak hour: {peak_hour}:00 Hrs"):
+#     st.map(df_filtered)
+# else:
+#     st.map(df)
+
+
+filtered_hour = st.slider("Hour", 0, 23, 17)  # min: 0h, max: 23h, default: 17h
+df_filtered = df[hours == filtered_hour]
+st.map(df_filtered)
